@@ -1,4 +1,3 @@
-
 @extends('layouts.header')
 @section('content')
 <center>
@@ -21,15 +20,19 @@
             <td>{{$value['title']}}</td>
             <td>{{$value['content']}}</td>
            <td>  {{\Carbon\Carbon::parse($value['created_at'])->format('y-m-d')}}</td>
+           <form class="form-inline" method="post" action="/posts/{{$value['id']}}">
+            @csrf
+            @method('delete')
             <td> <button type="button" class="btn btn-info my-3" onclick='window.location="{{route('posts.show',['post' => $value['id'] ])}}"'>View</button>
             <button type="button" class="btn btn-primary my-3" onclick='window.location="{{route('posts.edit',['post' => $value['id'] ])}}"'>Edit</button>
-            <button type="button" class="btn btn-primary my-3" onclick='window.location="{{route('posts.index',['post' => $value['id'] ])}}"'>Delete</button>
+           
+            <button type="submit" class="btn btn-primary my-3">Delete</button>
+           </form>
             </td>
           </tr>
           @endforeach
 
         </tbody>
       </table>
-      </body>
-</html>
+
 @endsection

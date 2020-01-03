@@ -38,13 +38,16 @@ class PostController extends Controller
         return view('posts.edit', ['post' => Post::findOrFail($id)]);
     }
     function update($id)
-    {  Post::destroy($id);
+    {  $post=Post::findOrFail($id);
+         $post->title = request()->title;
+         $post->content = request()->content;
+         $post->save();
          return redirect()->route('posts.index');
     }
     function destroy($id)
     {
         $post=Post::findOrFail($id);
-        $post->destroy();
+        $post->delete();
         return redirect()->route('posts.index');
         
     }
