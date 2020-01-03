@@ -5,11 +5,11 @@
 @csrf
   <div class="form-group">
     <label for="exampleInputEmail1">Title</label>
-    <input name="title"type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Solid principles">
+    <input name="title"type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Description</label>
-    <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder=" In this post we are going to know the solid principles"></textarea>
+    <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" ></textarea>
   </div>
   
   <button type="submit" class="btn btn-primary">Submit</button>

@@ -1,14 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Post; 
-
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     function index(){
-        $posts = Post::all(); //fetching 
+        $posts = Post::paginate(4); //fetching data from database and paginating 4 posts per page
         return view('posts.index',['posts'=>$posts]);
     }
     function create()

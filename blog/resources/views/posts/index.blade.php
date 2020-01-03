@@ -1,3 +1,4 @@
+
 @extends('layouts.header')
 @section('content')
 <center>
@@ -26,13 +27,14 @@
             <td> <button type="button" class="btn btn-info my-3" onclick='window.location="{{route('posts.show',['post' => $value['id'] ])}}"'>View</button>
             <button type="button" class="btn btn-primary my-3" onclick='window.location="{{route('posts.edit',['post' => $value['id'] ])}}"'>Edit</button>
            
-            <button type="submit" class="btn btn-primary my-3">Delete</button>
+            <button type="submit" class="btn btn-danger my-3" onclick='return confirm("Are you sure to delete this post?");'>Delete </button>
            </form>
             </td>
           </tr>
           @endforeach
 
         </tbody>
+        
       </table>
-
+      {{ $posts->links() }} <!--will generate links for pages like bootstrap links-->
 @endsection
