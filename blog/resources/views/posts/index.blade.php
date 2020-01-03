@@ -38,5 +38,6 @@
         </tbody>
         
       </table>
+      
       {{ $posts->links() }} <!--will generate links for pages like bootstrap links-->
 @endsection

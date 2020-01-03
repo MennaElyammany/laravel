@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Post; 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -22,7 +23,6 @@ class PostController extends Controller
         // $post->title = request()->title;
         // $post->content = request()->content;
         // $post->save();
-        
         Post::create([
             'title' => $request->title,
             'content' => $request->content, // ?????????????????
@@ -38,10 +38,12 @@ class PostController extends Controller
     {
         return view('posts.edit', ['post' => Post::findOrFail($id)]);
     }
-    function update($id)
-    {  $post=Post::findOrFail($id);
-         $post->title = request()->title;
-         $post->content = request()->content;
+    function update(UpdatePostRequest $request,$id)
+    { 
+         $post=Post::findOrFail($id);
+         $post->title =$request->title;
+         $post->content = $request->content;
+
          $post->save();
          return redirect()->route('posts.index');
     }
