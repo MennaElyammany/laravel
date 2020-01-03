@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\Post; 
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -13,7 +15,7 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
-    function store()
+    function store(StorePostRequest $request)
     {
         //alternative
         // $post = new Post;
@@ -22,8 +24,9 @@ class PostController extends Controller
         // $post->save();
         
         Post::create([
-            'title' => request()->title,
-            'content' => request()->content
+            'title' => $request->title,
+            'content' => $request->content, // ?????????????????
+            'user_id'=>$request->user()->id //user method in post model attach this post to current user
         ]);
         return redirect()->route('posts.index');
     }
