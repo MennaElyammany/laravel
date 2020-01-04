@@ -1,5 +1,5 @@
 
-@extends('layouts.header')
+@extends('layouts.app')
 @section('content')
 
 <div class="card m-5" style="max-width: 50rem;">

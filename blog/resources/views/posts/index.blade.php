@@ -1,5 +1,5 @@
 
-@extends('layouts.header')
+@extends('layouts.app')
 @section('content')
 <center>
 <button type="button" class="btn btn-success my-3" onclick="window.location='{{ route("posts.create") }}'">CREATE POST</button>

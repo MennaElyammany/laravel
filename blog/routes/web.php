@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', 'PostController@index')->name('posts.index');
+Route::get('/posts', 'PostController@index')->name('posts.index')->middleware('auth');
 Route::get('posts/create', 'PostController@create')->name('posts.create');
 Route::post('/posts', 'PostController@store');
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
@@ -25,3 +25,7 @@ Route::patch('/posts/{post}', 'PostController@update');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
