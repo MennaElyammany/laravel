@@ -30,7 +30,7 @@ class PostController extends Controller
             
             //slug filled automaticlly
             ]);
-            return dd($request->slug);
+            
         return redirect()->route('posts.index');
     }
     function show($id)
