@@ -26,8 +26,11 @@ class PostController extends Controller
         Post::create([
             'title' => $request->title,
             'content' => $request->content, // ?????????????????
-            'user_id'=>$request->user()->id //user method in post model attach this post to current user
-        ]);
+            'user_id'=>$request->user()->id, //user method in post model attach this post to current user
+            
+            //slug filled automaticlly
+            ]);
+            return dd($request->slug);
         return redirect()->route('posts.index');
     }
     function show($id)
@@ -41,6 +44,7 @@ class PostController extends Controller
     function update(UpdatePostRequest $request,$id)
     { 
          $post=Post::findOrFail($id);
+         $post->slug = null; //reset slug 
          $post->title =$request->title;
          $post->content = $request->content;
 
