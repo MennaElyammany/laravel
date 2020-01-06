@@ -5,7 +5,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     function index(){
@@ -17,19 +17,25 @@ class PostController extends Controller
         return view('posts.create');
     }
     function store(StorePostRequest $request)
-    {
-        //alternative
+    {  
+        //alternative   
         // $post = new Post;
         // $post->title = request()->title;
         // $post->content = request()->content;
         // $post->save();
-        Post::create([
+       
+
+        $post=Post::create([
+            
             'title' => $request->title,
             'content' => $request->content, // ?????????????????
             'user_id'=>$request->user()->id, //user method in post model attach this post to current user
             
             //slug filled automaticlly
             ]);
+            if($request->image){
+            $post->update(['image'=>$request->file('image')->store('uploads','public')]);
+            }
             
         return redirect()->route('posts.index');
     }
@@ -47,6 +53,8 @@ class PostController extends Controller
          $post->slug = null; //reset slug 
          $post->title =$request->title;
          $post->content = $request->content;
+         
+         $post->image=$request->image->store('public');
 
          $post->save();
          return redirect()->route('posts.index');
@@ -54,7 +62,15 @@ class PostController extends Controller
     function destroy($id)
     {
         $post=Post::findOrFail($id);
+        
+        if($post['image'])
+        {
+            dd(Storage::get(asset($post['image'])));
+        Storage::delete(public_path()."/storage/".$post['image']);
+      
+        }
         $post->delete();
+        
         return redirect()->route('posts.index');
         
     }

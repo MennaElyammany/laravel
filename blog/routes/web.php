@@ -22,10 +22,7 @@ Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 Route::delete('/posts/{post}', 'PostController@destroy');
 Route::patch('/posts/{post}', 'PostController@update');
-
-
-
-
+Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')->where('driver', implode('|', config('auth.socialite.drivers')));
+Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->where('driver', implode('|', config('auth.socialite.drivers')));
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');

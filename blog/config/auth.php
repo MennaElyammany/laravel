@@ -101,6 +101,11 @@ return [
         ],
     ],
 
+    'socialite' => [
+        'drivers' => [
+            'google','github'
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

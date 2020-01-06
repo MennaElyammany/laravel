@@ -6,6 +6,12 @@
   <div class="card-header bg-light" >
     Post Info
   </div>
+
+  @if($post['image'])
+  <img src="{{(asset('storage/'.$post['image']))}}"style="width: 150px; height: 150px" >
+  
+  @endif
+ 
   <div class="card-body">
     <h5 class="card-title"> <span class="font-weight-bold" >Title:- </span>{{$post['title']}}</h5>
     <h5 class="card-title"> <span class="font-weight-bold" >Description:- </span>{{$post['content']}}</h5>
