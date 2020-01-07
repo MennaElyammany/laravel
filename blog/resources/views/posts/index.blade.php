@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
+<!--@includeWhen(true, 'includeWhen.try', [Auth::user()['provider_name'] => 'null']) -->
 <center>
 <button type="button" class="btn btn-success my-3" onclick="window.location='{{ route("posts.create") }}'">CREATE POST</button>
 </center>

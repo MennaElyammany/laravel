@@ -22,5 +22,12 @@ class Post extends Model
     {
        return $this->belongsTo(User::class); //attach this post to user App/User one post has one user
     }
+    
+    public function comments()
+    {
+      return $this->hasMany(Comment::class);
+    }
+        
+
 
 }

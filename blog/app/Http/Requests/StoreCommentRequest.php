@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-class UpdatePostRequest extends FormRequest
+
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,6 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-    
         return true;
     }
 
@@ -25,10 +24,9 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','min:3',Rule::unique('posts')->ignore($this->route()->post),],
-             'content' => 'required',
-             'image'=>'nullable|file|image|mimes:jpeg,png'
+            'body' => 'required|max:1000',
+            
+            //
         ];
     }
 }
-// Rule ignores the post with sent (current)id on route field... uri /posts/{post} 

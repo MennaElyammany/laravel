@@ -67,16 +67,17 @@ class LoginController extends Controller
 
 }
 private function findOrCreateUser($user,$driver)
-    {
+    { 
      
         if ($authUser = User::where('email', $user->email)->first()) {
             return $authUser;
         }
     if($driver=='github')
         return User::create([
-            'name' => $user->nikname,
+            'name' => $user->nickname,
             'email' => $user->email,
             'provider_id ' => $user->id,
+            'provider_name'=>$driver,
             
         ]);
         if($driver=='google')
@@ -84,7 +85,7 @@ private function findOrCreateUser($user,$driver)
             'name' => $user->name,
             'email' => $user->email,
             'provider_id ' => $user->id,
-            
+            'provider_name'=>$driver,
         ]);
 
     }}

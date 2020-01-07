@@ -16,6 +16,22 @@
     <h5 class="card-title"> <span class="font-weight-bold" >Title:- </span>{{$post['title']}}</h5>
     <h5 class="card-title"> <span class="font-weight-bold" >Description:- </span>{{$post['content']}}</h5>
     
+    <form class="form-inline" method="POST" action="/comments/{{$post['id']}}">
+            @csrf
+            <div class="form-group">
+       
+        <textarea name="body" class="form-control" id="exampleFormControlTextarea1"  placeholder="Add Comment" ></textarea>
+         </div>
+             <button type="submit" class="btn btn-info my-3" >ADD</button>   
+                    
+           </form>
+           @foreach($post->comments as $comment)  
+           <div style="background-color:#9FF9C9">
+           <p>{{ $comment->user->name }}  {{\Carbon\Carbon::parse($comment->created_at)->format('y-m-d')}}</p>
+           <p>{{ $comment->body }}</p>
+           </div>
+          @endforeach
+
 
   </div>
 </div>

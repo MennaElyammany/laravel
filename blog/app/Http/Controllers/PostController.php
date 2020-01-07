@@ -24,7 +24,7 @@ class PostController extends Controller
         // $post->content = request()->content;
         // $post->save();
        
-
+dd($request->user());
         $post=Post::create([
             
             'title' => $request->title,
@@ -35,6 +35,7 @@ class PostController extends Controller
             ]);
             if($request->image){
             $post->update(['image'=>$request->file('image')->store('uploads','public')]);
+           
             }
             
         return redirect()->route('posts.index');
@@ -53,9 +54,16 @@ class PostController extends Controller
          $post->slug = null; //reset slug 
          $post->title =$request->title;
          $post->content = $request->content;
-         
-         $post->image=$request->image->store('public');
-
+        
+             if($request->image){
+                unlink(public_path()."/storage/".$post['image']);
+                $post->update(['image'=>$request->file('image')->store('uploads','public')]);
+             }
+            else{
+                if($post->image){
+                unlink(public_path()."/storage/".$post['image']); 
+                $post->update(['image'=>null]);
+            }}
          $post->save();
          return redirect()->route('posts.index');
     }
@@ -65,8 +73,8 @@ class PostController extends Controller
         
         if($post['image'])
         {
-            dd(Storage::get(asset($post['image'])));
-        Storage::delete(public_path()."/storage/".$post['image']);
+            
+        unlink(public_path()."/storage/".$post['image']); //delete image from storage
       
         }
         $post->delete();

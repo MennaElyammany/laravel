@@ -26,3 +26,4 @@ Route::get('login/{driver}', 'Auth\LoginController@redirectToProvider')->where('
 Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->where('driver', implode('|', config('auth.socialite.drivers')));
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/comments/{id}', 'commentsController@store');

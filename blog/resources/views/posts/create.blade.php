@@ -18,8 +18,6 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-  
-
 </div>
 @if ($errors->any())
     <div class="alert alert-danger">

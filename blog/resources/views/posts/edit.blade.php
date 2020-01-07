@@ -2,7 +2,7 @@
 @section('content')
 
    <div class="container my-5">
-<form method="POST" action="/posts/{{$post['id']}}">
+<form method="POST" action="/posts/{{$post['id']}}" enctype="multipart/form-data">
 @csrf
 @method('PATCH') <!-- to use patch method -->
   <div class="form-group">
@@ -13,7 +13,10 @@
     <label for="exampleFormControlTextarea1">Description</label>
     <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" >{{$post['content']}}</textarea>
   </div>
-  
+  <div class="form-group">
+    <label for="image"> Attach image</label>
+    <input type="file" class="form-control-file" name="image" >
+  </div>
   <button type="submit" class="btn btn-primary"> Update</button>
 </form>
 </div>
